@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div id="nav">
+      <router-link to="/survey">Survey</router-link> |
+      <router-link to="/secret">Secret</router-link> |
+    </div>
     <router-view/>
   </div>
 </template>
