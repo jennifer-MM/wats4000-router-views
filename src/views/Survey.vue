@@ -14,38 +14,32 @@
       <p>
         Q2: What languages interest you the most?
         <br />
-        <!-- TODO: Create a loop to duplicate the label element and structures it contains for each item in the languageOptions array. -->
-        <label v-for="text in text.languageOptions" :key="text">
-          {{ text }}
-          <input type="checkbox" v-model="languageOptions" v-bind:value="text"/>
-          <!-- TODO: Set the proper v-model directive and use v-bind:value to set the value for this checkbox. -->
-          <!-- TODO: Output the text to display this option to the user. -->
+
+        <label v-for="language in languageOptions" :key="language">
+          <input type="checkbox" v-model="q2" v-bind:value="language.value">
+          {{ language.text }}
         </label>
       </p>
 
       <p>
         Q3: What other topics interest you?
         <br />
-        <!-- TODO: Create a loop to duplicate the label element and structures it contains for each item in the topicOptions array. -->
-        <label>
-          <input type="checkbox" />
-          <!-- TODO: Set the proper v-model directive and use v-bind:value to set the value for this checkbox. -->
-          <!-- TODO: Output the text to display this option to the user. -->
+        <label v-for="topic in topicOptions" :key="topic">
+          <input type="checkbox" v-model="q3" v-bind:value="topic.value">
+          {{ topic.value }}
         </label>
       </p>
       <p>
         <label for="q4">
           Q4: What kinds of websites would you like to build someday?
           <br />
-          <textarea cols="70" rows="8" id="q4" placeholder="Type your response here."></textarea>
-          <!-- TODO: Set the proper v-model directive on this textarea. -->
+          <textarea cols="70" rows="8" id="q4" placeholder="Type your response here." v-model="q4"></textarea>
         </label>
       </p>
       <p>
         <label for="q5">
           Q5: Spaces or Tabs?
           <select id="q5" v-model="q5">
-            <!-- TODO: Set the proper v-model directive on this select element. -->
             <option value>Select your preference.</option>
             <option value="spaces">Spaces</option>
             <option value="tabs">Tabs</option>
@@ -119,12 +113,11 @@ export default {
   methods: {
     validateForm: function () {
       if ((this.q1 !== '') &&
-        (this.q2 > 0) &&
-        (this.q3 > 0) &&
+        (this.q2.length > 0) &&
+        (this.q3.length > 0) &&
         (this.q4 !== '') &&
         (this.q5 !== '')) {
-        // Form data is valid, so turn off the form to show the success message.
-        this.showForm = false
+        this.$router.push('secret')
       } else {
         // Form data is NOT valid, so show the error message.
         this.showError = true
